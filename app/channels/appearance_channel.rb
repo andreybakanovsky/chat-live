@@ -2,7 +2,7 @@
 
 class AppearanceChannel < ApplicationCable::Channel
   def subscribed
-    # stream_from "appearance_channel"
+    stream_from "appearance_channel"
   end
 
   def unsubscribed
@@ -15,5 +15,10 @@ class AppearanceChannel < ApplicationCable::Channel
 
   def away
     current_user.away!
+  end
+
+  def receive(data)
+    message_id = data["message_id"].to_i
+    Message.find(message_id).update!(read: true)
   end
 end
