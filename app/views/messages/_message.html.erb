@@ -1,4 +1,10 @@
-<div class="message mb-2 <%= 'me' if message.sender == current_user %>">
+<%= turbo_frame_tag :message_status %>
+<div class="message mb-2 <%= 'me' if message.sender == current_user %>"
+   id=<%= "#{dom_id(message)}" %>
+    <% if message.sender != current_user %>
+      status="<%= message.read ? "read" : "unread" %>"
+    <% end %>
+  >
   <div class="content-container">
     <div class="content">
       <%= message.content %>
@@ -8,4 +14,3 @@
     </div>
   </div>
 </div>
-<div class="space"></div>

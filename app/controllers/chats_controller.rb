@@ -13,6 +13,10 @@ class ChatsController < ApplicationController
 
   private
 
+  helper_method def new_messages_number(recipient_id, sender_id)
+    NumberNewMessagesService.new(recipient_id:, sender_id:).perform
+  end
+
   helper_method def recipient
     @recipient ||= User.find(params[:id])
   end
