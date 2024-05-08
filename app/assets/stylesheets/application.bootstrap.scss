@@ -13,7 +13,6 @@ body {
 
 .chat-space {
     height: 100vh;
-    // position: relative;
 
     #messages {
         height: 100%;
@@ -47,7 +46,6 @@ body {
             .content-container {
                 text-align: right;
                 float: right;
-                // display: inline-block;
                 .content {
                     padding: 8px 16px;
                     border-radius: 10px;
@@ -58,7 +56,7 @@ body {
         }
     }
     .space {
-        min-height: 10px;
+        min-height: 1px;
     }
     .chat-box {
         position: fixed;
@@ -99,10 +97,17 @@ body {
             .name {
                 color: white;
             }
+            .unread-messages-number {
+                color: white;
+            }
         }
         .name {
-            // font-weight: bold;
             color: $gray-800;
+        }
+        .unread-messages-number {
+            bottom: 10px;
+            right: 10px;
+            position: absolute;
         }
     }
 }

@@ -1,6 +1,7 @@
 <div id="user-id" data-user-id="<%= current_user.id %>"></div>
 <div id="chat-token" data-chat-token="<%= @token %>"></div>
 <%= turbo_stream_from :appearance_channel %>
+<%= turbo_stream_from :message_status %>
 <div class="container-fluid">
   <div class="row">
     <div class="col-3 charts-sidebar">
@@ -10,7 +11,10 @@
           <div class="card no-outline mb-2 chart-card <%= active_class %>">
             <div class="card-body">
               <span class='name'><%= user.name %></span><br>
-                <%= render "users/online_status", user: user %>
+              <%= render "users/online_status", user: user %>
+              <% if !user.as_common_chat? %>
+                <%= render "messages/new_messages_number", recipient_id: current_user.id,  sender_id: user.id %>
+              <% end %>
             </div>
           </div>
         <% end %>
@@ -24,9 +28,10 @@
               <%= @recipient.name %>
             </span>
           </nav>
-          <div id="messages" class="flex-grow-1 overflow-auto">
+          <div id="messages" user=<%= @recipient.id %>>
             <% @users_messages.each do |message| %>
               <%= render 'messages/message', message: message %>
+              <div class="space"></div>
             <% end %>
           </div>
           <div class="chat-box">

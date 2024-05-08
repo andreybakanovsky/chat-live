@@ -1,4 +1,4 @@
-<div class="message mb-2">
+<div class="message mb-2" id=<%= "#{dom_id(message)}" %> status="<%= message.read ? "read" : "unread" %>">
   <div class="content-container">
     <div class="content">
       <%= message.content %>
